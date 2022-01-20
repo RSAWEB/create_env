@@ -20,4 +20,4 @@ runs:
   args:
     - ${{ inputs.file_name }}
     - ${{ inputs.environment }}
-    - ${{ inputs.secrets }}
+    - '${{ inputs.secrets }}'
