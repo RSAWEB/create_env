@@ -1,15 +1,26 @@
 import json
 import os
 import re
-import sys
 
-env_file = sys.argv[1]
-environment = "{}_".format(sys.argv[2])
-secrets = json.loads(sys.argv[3])
+env_file = ""
+
+path = str(os.environ.get("GITHUB_WORKSPACE", "."))
+env_file_name = str(os.environ.get("INPUT_FILE_NAME", ".env"))
+environment = str(os.environ.get("INPUT_ENVIRONMENT", "STAGING"))
+secrets = json.loads(str(os.environ.get("INPUT_SECRETS", "[]")))
+
 for key, value in secrets.items():
-    if not key.startswith(environment):
+    print(f"Setting {key} ...", end=' ')
+
+    if not key.startswith("{}_".format(environment)):
+        print(':o:')
         continue
 
     if re.match(r'^[A-Z_]+=', value):
-        print(f"Setting {key} ...")
-        os.system(f"echo '{value}' >> {env_file}")
+        env_file += value + "\n"
+        print(':heavy_check_mark:')
+    else:
+        print(':x:')
+
+with open(os.path.join(path, env_file_name), "w") as text_file:
+    text_file.write(env_file)
