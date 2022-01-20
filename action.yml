@@ -8,7 +8,7 @@ inputs:
     required: true
   secrets:
     description: 'The json object we read the secrets from'
-    default: '${{ toJson(secrets) }}'
+    default: '{}'
     required: true
   file_name:
     description: 'The filename for the envfile'
@@ -20,4 +20,4 @@ runs:
   args:
     - ${{ inputs.file_name }}
     - ${{ inputs.environment }}
-    - ${{ toJson(secrets) }}
+    - ${{ inputs.secrets }}
