@@ -1,0 +1,19 @@
+# action.yml
+name: 'Create ENV'
+description: 'Create env file based off secrets'
+inputs:
+  environment:
+    description: 'The environment we are working with'
+    default: 'STAGING'
+    required: true
+  secrets:
+    description: 'The json object we read the secrets from'
+    default: '{}'
+    required: true
+  file_name:
+    description: 'The filename for the envfile'
+    default: '.env'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
