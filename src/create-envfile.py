@@ -18,7 +18,7 @@ for key, value in sorted(secrets.items()):
 
     if re.match(r'^[A-Z_]+=', value):
         env_file += value + "\n"
-        print("\U00002714")
+        print("\U00002705")
     else:
         print("\U0000274c")
 
