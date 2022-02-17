@@ -22,5 +22,11 @@ for key, value in sorted(secrets.items()):
     else:
         print("\U0000274c")
 
+if not re.findall('^DEBUG=', env_file, re.MULTILINE):
+    if environment == "PROD":
+        env_file += "DEBUG=False"
+    else:
+        env_file += "DEBUG=True"
+
 with open(os.path.join(path, env_file_name), "w") as text_file:
     text_file.write(env_file)
