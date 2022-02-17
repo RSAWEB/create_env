@@ -9,7 +9,7 @@ env_file_name = str(os.environ.get("INPUT_FILE_NAME", ".env"))
 environment = str(os.environ.get("INPUT_ENVIRONMENT", "STAGING"))
 secrets = json.loads(str(os.environ.get("INPUT_SECRETS", "[]")))
 
-for key, value in secrets.items():
+for key, value in sorted(secrets.items()):
     print(f"Setting {key} ...", end=' ')
 
     if not key.startswith("{}_".format(environment)):
